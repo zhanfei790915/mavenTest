@@ -13,6 +13,6 @@ public class SaveProductController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		logger.info("SaveProductController is called!");
-		return new ModelAndView("/WEB-INFO/jsp/productForm.jsp");
+		return new ModelAndView("productDetails");
 	}
 }
