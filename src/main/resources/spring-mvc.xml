@@ -12,12 +12,11 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<!-- HandlerMapping -->  
     <bean  
-        class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />  
-  
+        class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
     <!-- HandlerAdapter -->  
     <bean  
         class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />  
-    <!-- ViewResolver -->  
+    <!--jsp ViewResolver --> 
     <bean  
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="viewClass"  
@@ -25,6 +24,12 @@
         <property name="prefix" value="/WEB-INF/jsp/" />  
         <property name="suffix" value=".jsp" />  
     </bean>
+    <!-- beetle configuration -->
+    <bean id="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init"/>
+    <bean id="viewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
+    	<property name="contentType" value="text/html;charset=UTF-8"/>
+    </bean>
+    <!-- action mapping -->
 	<bean name="/product_input.action" class="app03a.controller.InputProductController" />
 	<bean name="/product_save.action"  class="app03a.controller.SaveProductController" />
 	<context:component-scan base-package="app03a.controller"/>
