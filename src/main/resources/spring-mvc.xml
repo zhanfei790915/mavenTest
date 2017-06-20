@@ -10,13 +10,15 @@
        http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	<!-- HandlerMapping -->  
-    <bean  
-        class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
-    <!-- HandlerAdapter -->  
-    <bean  
-        class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />  
-    <!--jsp ViewResolver --> 
+    <!-- spring mvc 注解配置 -->
+    <mvc:annotation-driven />
+    <!-- spring mvc 控制器自动扫描类路径 -->
+    <context:component-scan base-package="app03a.controller"/>
+    <context:component-scan base-package="app03a.service"/>
+	<!-- resource 静态资源-->
+	<mvc:resources location="WEB-INF/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/html/" mapping="/*.html" />
+	<!--jsp ViewResolver --> 
     <bean  
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="viewClass"  
@@ -32,9 +34,8 @@
     <!-- action mapping -->
 	<bean name="/product_input.action" class="app03a.controller.InputProductController" />
 	<bean name="/product_save.action"  class="app03a.controller.SaveProductController" />
-	<context:component-scan base-package="app03a.controller"/>
-	<context:annotation-config />
-    <mvc:annotation-driven />
+	
+	
     <!-- 配置springMVC处理上传文件的信息 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="utf-8"/>
