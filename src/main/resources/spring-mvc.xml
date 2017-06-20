@@ -23,7 +23,7 @@
 	<mvc:resources location="/ui/" mapping="/ui/**" />
 	<mvc:resources location="/view/" mapping="/view/**" />
 	<mvc:resources location="/*.ico" mapping="/*.ico" />
-	<!--jsp ViewResolver --> 
+	<!--jsp ViewResolver 使用beetl视图就必须注释JSP视图--> 
 	<!-- 
     <bean  
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
@@ -33,7 +33,7 @@
         <property name="suffix" value=".jsp" />  
     </bean>
      -->
-    <!-- beetle configuration -->
+    <!-- beetle configuration 使用JSP视图可以不用注释beetl视图-->
     <bean id="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init"/>
     <bean id="viewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
     	<property name="contentType" value="text/html;charset=UTF-8"/>
