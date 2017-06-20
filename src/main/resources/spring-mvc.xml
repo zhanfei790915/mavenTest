@@ -13,12 +13,18 @@
     <!-- spring mvc 注解配置 -->
     <mvc:annotation-driven />
     <!-- spring mvc 控制器自动扫描类路径 -->
-    <context:component-scan base-package="app03a.controller"/>
-    <context:component-scan base-package="app03a.service"/>
-	<!-- resource 静态资源-->
-	<mvc:resources location="WEB-INF/css/" mapping="/css/**" />
+    <context:component-scan base-package="app03a.controller"/><!-- 控制器类扫描 -->
+    <context:component-scan base-package="app03a.service"/><!-- 服务类扫描 -->
+	<!-- resource 静态资源  用户在访问mapping路径的时候，会自动映射到服务器端应用本地项目路径location设置路径-->
+	<!-- strudy use -->
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
 	<mvc:resources location="/WEB-INF/html/" mapping="/*.html" />
+	<!-- jfinal ui use -->
+	<mvc:resources location="/ui/" mapping="/ui/**" />
+	<mvc:resources location="/view/" mapping="/view/**" />
+	<mvc:resources location="/*.ico" mapping="/*.ico" />
 	<!--jsp ViewResolver --> 
+	<!-- 
     <bean  
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="viewClass"  
@@ -26,17 +32,16 @@
         <property name="prefix" value="/WEB-INF/jsp/" />  
         <property name="suffix" value=".jsp" />  
     </bean>
+     -->
     <!-- beetle configuration -->
     <bean id="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init"/>
     <bean id="viewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
     	<property name="contentType" value="text/html;charset=UTF-8"/>
     </bean>
-    <!-- action mapping -->
+    <!-- action mapping 传统访问路径映射定义，项目中目前都使用注解定义路径映射，可实现一个控制器定义N个路径-->
 	<bean name="/product_input.action" class="app03a.controller.InputProductController" />
 	<bean name="/product_save.action"  class="app03a.controller.SaveProductController" />
-	
-	
-    <!-- 配置springMVC处理上传文件的信息 -->
+    <!-- 配置springMVC处理上传文件的配置 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="utf-8"/>
         <property name="maxUploadSize" value="10485760000"/>
